@@ -1,4 +1,3 @@
-
 from flask import Flask, request, redirect, render_template_string
 import redis
 import os
@@ -27,7 +26,7 @@ def vote():
     # Fetch votes from Redis
     votes = redis_conn.lrange('votes', 0, -1)  # Get all votes
 
-    # lrange returns a list of bytes, so decode first
+    # Redis returns bytes, so decode them
     decoded_votes = [v.decode('utf-8') for v in votes]
     cats_count = decoded_votes.count('Cats')
     dogs_count = decoded_votes.count('Dogs')
